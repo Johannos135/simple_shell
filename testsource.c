@@ -1,5 +1,4 @@
 #include "stringfun.h"
-#include "template.h"
 
 /**
  * main - Entry point
@@ -7,12 +6,13 @@
  */
 int main(void)
 {
-	char hello[6] = "Hello";
-	int i;
+    char dest[40] = "Welcome to ";
+    char src[] = "Alice world";
+    //Append src in dest
+    char *hello = _strcat(dest, src);
+    int i;
 
-	reverse_str(hello);
-
-	for (; hello[i] != '\0'; i++)
+	for (i = 0; hello[i] != '\0'; i++)
 		putchar(hello[i]);
 	putchar('\n');
 

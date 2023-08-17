@@ -36,5 +36,21 @@ void reverse_str(char *str)
  */
 char *_strcat(char *dest, const char *src)
 {
-	/* Code goes here */
+	int count1 = 0, count2 = 0;
+
+	if (dest == NULL && src == NULL)
+		return (NULL);
+
+	while (dest[count1] != '\0')
+		count1++;
+
+	while (src[count2] != '\0')
+	{
+		dest[count1] = src[count2];
+		count1++;
+		count2++;
+	}
+	dest[count1] = '\0';
+
+	return (dest);
 }
