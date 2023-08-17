@@ -1,5 +1,5 @@
-#ifndef _STRING_FUN_
-#define _STRING_FUN_
+#ifndef _STRINGFUN_
+#define _STRINGFUN_
 
 #include <stdio.h>
 #include <unistd.h>

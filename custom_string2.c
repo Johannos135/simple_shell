@@ -1,4 +1,4 @@
-#include "string_fun.h"
+#include "stringfun.h"
 
 /**
  * reverse_str - this function aims to reverse a string.
@@ -25,4 +25,16 @@ void reverse_str(char *str)
 			*(chaine + (y - 1)) = temp;
 		}
 	}
+}
+
+/**
+ * _strcat - this function aims to concatanate two strings
+ * @dest: The destination string (end result).
+ * @src: The started string or the source.
+ *
+ * Return: the concatanated string.
+ */
+char *_strcat(char *dest, const char *src)
+{
+	/* Code goes here */
 }
