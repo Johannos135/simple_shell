@@ -1,5 +1,17 @@
-#ifndef STRING_FUN_H
-#define STRING_FUN_H
+#ifndef _STRING_FUN_
+#define _STRING_FUN_
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <limits.h>
+#include "template.h"
 
 /* Encapsulate in custom_string1 c file */
 int _strlen(const char *str);
