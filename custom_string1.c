@@ -115,13 +115,11 @@ char *_strtok(char *str, const char *delimiter)
 
 	if (first_word == last_word)
 		return (NULL);
-
 	for (b = 0; *words; words++)
 	{
 		if (words != first_word)
 			if (*words && *(words - 1) == '\0')
 				break;
-
 		for (count = 0; delimiter[count]; count++)
 		{
 			if (*words == delimiter[i])
@@ -133,11 +131,9 @@ char *_strtok(char *str, const char *delimiter)
 				break;
 			}
 		}
-
 		if (b == 0 && *words)
 			b = 1;
 	}
-
 	if (b == 0)
 		return (NULL);
 	return (first_word);

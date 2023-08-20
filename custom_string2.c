@@ -54,3 +54,73 @@ char *_strcat(char *dest, const char *src)
 
 	return (dest);
 }
+
+/**
+ * _strcpy - this function aims to copy a string in src into dest.
+ * @dest: represents the destination parameter (the target).
+ * @src: represents the characters to be copied.
+ *
+ * Return: the characters copied.
+ */
+char *_strcpy(char *dest, char *src)
+{
+	int count = 0;
+
+	while (src[count] != '\0')
+	{
+		dest[count] = src[count];
+		count++;
+	}
+	dest[count] = '\0';
+
+	return (dest);
+}
+
+/**
+ * _strcmp - this function aims to compare str1 and str2.
+ * @str1: first string to be compared.
+ * @str2: second one.
+ *
+ * Return: 0 if true.
+ */
+int _strcmp(char *str1, char *str2)
+{
+	int count = 0;
+
+	while (str1[count] == str2[count] && str1[count])
+		count++;
+
+	if (str1[count] > str2[count])
+		return (1);
+
+	if (str1[count] < str2[count])
+		return (-1);
+
+	return (0);
+}
+
+/**
+ * _strchr - this function allows us to find the first instance
+ *  of a character in a string
+ *  @str: represents the entire string.
+ *  @character: instance of the character to find.
+ *
+ *  Return: the first instance of the chaeacter.
+ */
+char *_strchr(char *str, char character)
+{
+	int count = 0;
+
+	while (*(str + count) != '\0')
+	{
+		if (*(str + count) == character)
+		{
+			return (str + count);
+		}
+		count++;
+	}
+
+	if (*(str + count) == character)
+		return (str + character);
+	return ('\0');
+}

@@ -29,5 +29,8 @@ char *_strchr(char *str, char character);
 
 /* Encapsulate in custom_string3 */
 int _strspn(char *str, char *value);
+int _longueur(int number);
+char *_itoa(int number);
+int _atoi(int number);
 
 #endif
