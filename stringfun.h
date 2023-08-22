@@ -16,8 +16,8 @@
 /* Encapsulate in custom_string1 c file */
 int _strlen(const char *str);
 int _isdigit(const char *str);
-int *_strtok(char *str, const char *delimiter);
-int *_strdup(char *str);
+char *_strtok(char *str, const char *delimiter);
+char *_strdup(const char *str);
 int compare_char(char *str, const char *delimiter);
 
 /* Encapsulate in custom_string2 c file */

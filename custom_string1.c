@@ -108,7 +108,7 @@ char *_strtok(char *str, const char *delimiter)
 			return (NULL);
 		words = str;
 		count = _strlen(str);
-		last_word = &str[i];
+		last_word = &str[count];
 	}
 
 	first_word = words;
@@ -122,7 +122,7 @@ char *_strtok(char *str, const char *delimiter)
 				break;
 		for (count = 0; delimiter[count]; count++)
 		{
-			if (*words == delimiter[i])
+			if (*words == delimiter[count])
 			{
 				*words = '\0';
 

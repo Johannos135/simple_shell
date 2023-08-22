@@ -10,7 +10,7 @@
  */
 int _strspn(char *str, char *value)
 {
-	int count1 = 0, int count2 = 0;
+	int count1 = 0, count2 = 0;
 	int check;
 
 	while (str[count1] != '\0')

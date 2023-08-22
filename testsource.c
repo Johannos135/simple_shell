@@ -1,4 +1,4 @@
-#include "stringfun.h"
+#include "main.h"
 
 /**
  * main - Entry point
@@ -15,6 +15,7 @@ int main(void)
 	for (i = 0; hello[i] != '\0'; i++)
 		putchar(hello[i]);
 	putchar('\n');
+	prompt();
 
 	return (0);
 }
