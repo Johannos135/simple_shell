@@ -3,5 +3,6 @@
 
 /* memoryhandler.c */
 void _memcpy(void *destination, const void *source, unsigned int len);
-
+void *_realloc(void *src, unsigned int sizeof_src, unsigned int sizeof_dest);
+char **_realloc_v2(char **src, unsigned int sizeof_src, unsigned int sizeof_dest);
 #endif
