@@ -5,7 +5,6 @@
 #define SIZEOF_TOKBUF 128
 #define TK_DELIM " \t\r\n\a"
 
-extern char **environment;
 
 /**
  * struct node_data - this template gathers runtime data.
@@ -20,11 +19,11 @@ extern char **environment;
 typedef struct node_data
 {
 	char **argv;
-	char **args;
-	char **_environment;
 	char *input;
+	char **args;
 	int status;
 	int cpt;
+	char **_environment;
 	char *pid;
 } node_sh;
 

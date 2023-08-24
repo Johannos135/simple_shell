@@ -32,14 +32,14 @@ void data_setter(node_sh *nodesh, char **argv)
 	nodesh->status = 0;
 	nodesh->cpt = 1;
 
-	while (environment[count])
+	while (environ[count])
 		count++;
 
 	nodesh->_environment = malloc(sizeof(char *) * (count + 1));
 
-	while (environment[count])
+	while (environ[count])
 	{
-		nodesh->_environment[count] = _strdup(environment[count]);
+		nodesh->_environment[count] = _strdup(environ[count]);
 		count++;
 	}
 

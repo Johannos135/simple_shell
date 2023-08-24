@@ -6,7 +6,8 @@
 #include "memoryhandler.h"
 
 
-/*prompt function prototype*/
+
+/* prompt function prototype */
 void prompt(void);
 void _sigint_g(int s);
 /* message_error.c */
@@ -107,4 +108,5 @@ int split_commands(node_sh *nodesh, char *valeur);
 char **split_line(char *valeur);
 
 void runner(node_sh *nodesh);
+
 #endif

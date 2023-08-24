@@ -48,15 +48,15 @@ int _isdigit(const char *str)
 char *_strdup(const char *str)
 {
 	char *clone;
-	size_t length;
+	size_t count;
 
-	length = _strlen(str);
-	clone = malloc(sizeof(char) * (length + 1));
+	count = _strlen(str);
+	clone = malloc(sizeof(char) * (count + 1));
 
 	if (clone == NULL)
 		return (NULL);
 
-	_memcpy(clone, str, (length + 1));
+	_memcpy(clone, str, (count + 1));
 
 	return (clone);
 }

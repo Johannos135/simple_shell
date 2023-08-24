@@ -13,6 +13,8 @@
 #include <limits.h>
 #include "template.h"
 
+extern char **environ;
+
 /* Encapsulate in custom_string1 c file */
 int _strlen(const char *str);
 int _isdigit(const char *str);
