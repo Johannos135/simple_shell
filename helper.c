@@ -7,7 +7,7 @@ void environ_helper(void)
 {
 	char *env_help = "env: env [option] [name=value] [command [args]]\n\t";
 
-	write(STRDOUT_FILENO, env_help, _strlen(env_help));
+	write(STDOUT_FILENO, env_help, _strlen(env_help));
 	env_help = "Print the environment of the shell.\n";
 	write(STDOUT_FILENO, env_help, _strlen(env_help));
 }
@@ -61,5 +61,5 @@ void exit_helper(void)
 
 	write(STDOUT_FILENO, exit_help, _strlen(exit_help));
 	exit_help = "Quits the shell with a status";
-	write(STDOUTFILENO, exit_help, _strlen(exit_help));
+	write(STDOUT_FILENO, exit_help, _strlen(exit_help));
 }

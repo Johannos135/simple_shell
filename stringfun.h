@@ -12,7 +12,6 @@
 #include <signal.h>
 #include <limits.h>
 #include "template.h"
-#include "memoryhandler.h"
 
 /* Encapsulate in custom_string1 c file */
 int _strlen(const char *str);

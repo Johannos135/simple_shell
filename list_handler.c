@@ -60,27 +60,32 @@ void free_dividor(list_separator **entete)
  *
  * Return: node address
  */
-store_line aj_ligne(store_line **entete, char *cmdline)
+store_line *aj_ligne(store_line **entete, char *cmdline)
 {
-	store_line *add;
-	store_line *swap;
+	store_line *add, *swap;
 
 	add = malloc(sizeof(store_line));
 
 	if (add == NULL)
+	{
 		return (NULL);
+	}
+
 	add->cmd_line = cmdline;
 	add->next = NULL;
 	swap = *entete;
 
 	if (swap == NULL)
+	{
 		*entete = add;
+	}
 	else
 	{
 		while (swap->next != NULL)
 			swap = swap->next;
 		swap->next = add;
 	}
+
 	return (*entete);
 }
 
