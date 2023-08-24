@@ -9,35 +9,35 @@
  */
 void environ_checker(store_var **h, char *in, node_sh *nodesh)
 {
-	int row, param, count, left_value;
+	int row, param, cpt, left_value;
 	char **nvl_env;
 
 	nvl_env = nodesh->_environment;
 	for (row = 0; nvl_env[row]; row++)
 	{
-		for (count =1, param = 0; nvl_env[row][param]; param++)
+		for (cpt = 1, param = 0; nvl_env[row][param]; param++)
 		{
 			if (nvl_env[row][param] == '=')
 			{
 				left_value = _strlen(nvl_env[row] + param + 1);
-				aj_var(h, count, nvl_env[row] + param + 1, left_value);
+				aj_var(h, cpt, nvl_env[row] + param + 1, left_value);
 				return;
 			}
 
-			if (in[count] == nvl_env[row][param])
-				count++;
+			if (in[cpt] == nvl_env[row][param])
+				cpt++;
 			else
 				break;
 		}
 	}
 
-	for (count =0; in[count]; count++)
+	for (cpt = 0; in[cpt]; cpt++)
 	{
-		if (in[count] == ' ' || in[count] == '\t' || in[count] == ';' || in[count] == '\n')
+		if (in[cpt] == ' ' || in[cpt] == '\t' || in[cpt] == ';' || in[cpt] == '\n')
 			break;
 	}
 
-	aj_var(h, count, NULL, 0);
+	aj_var(h, cpt, NULL, 0);
 }
 
 /**
@@ -45,43 +45,44 @@ void environ_checker(store_var **h, char *in, node_sh *nodesh)
  *
  * @entete: head of the linked list
  * @value: this param represents value
- * @etat: last status 
+ * @etat: last status
  * @nodesh: node value
  *
  * Return: position index
  */
-int variable_checkers(store_var **entete, char *value, char *etat, node_sh *nodesh)
+int variable_checkers(store_var **entete, char *value,
+		char *etat, node_sh *nodesh)
 {
-	int last_int, pd_param, count = 0;
+	int last_int, pd_param, cpt = 0;
 
 	last_int = _strlen(etat);
 	pd_param = _strlen(nodesh->pid);
-	
-	while (value[count])
+
+	while (value[cpt])
 	{
-		if (value[count] == '$')
+		if (value[cpt] == '$')
 		{
-			if (value[count + 1] == '?')
-				aj_var(entete, 2, etat, last_int), count++;
-			else if (value[count + 1] == '$')
-				aj_var(entete, 2, nodesh->pid, pd_param), count++;
-			else if (value[count + 1] == '\n')
+			if (value[cpt + 1] == '?')
+				aj_var(entete, 2, etat, last_int), cpt++;
+			else if (value[cpt + 1] == '$')
+				aj_var(entete, 2, nodesh->pid, pd_param), cpt++;
+			else if (value[cpt + 1] == '\n')
 				aj_var(entete, 0, NULL, 0);
-			else if (value[count + 1] == '\0')
+			else if (value[cpt + 1] == '\0')
 				aj_var(entete, 0, NULL, 0);
-			else if (value[count + 1] == ' ')
+			else if (value[cpt + 1] == ' ')
 				aj_var(entete, 0, NULL, 0);
-			else if (value[count + 1] == '\t')
+			else if (value[cpt + 1] == '\t')
 				aj_var(entete, 0, NULL, 0);
-			else if (value[count + 1] == ';')
+			else if (value[cpt + 1] == ';')
 				aj_var(entete, 0, NULL, 0);
 			else
-				environ_checker(entete, value + count, nodesh);
+				environ_checker(entete, value + cpt, nodesh);
 		}
-		count++;
+		cpt++;
 	}
 
-	return (count);
+	return (cpt);
 }
 
 /**
@@ -93,25 +94,26 @@ int variable_checkers(store_var **entete, char *value, char *etat, node_sh *node
  * @sizeof_n: new size of value
  * Return: new value
  */
-char *val_replacement(store_var **head, char *value, char *new_value, int sizeof_n)
+char *val_replacement(store_var **head, char *value,
+		char *new_value, int sizeof_n)
 {
 	store_var *indice;
-	int i, count, k;
+	int i, cpt, k;
 
 	indice = *head;
-	for (count = i = 0; i < sizeof_n; i++)
+	for (cpt = i = 0; i < sizeof_n; i++)
 	{
-		if (value[count] == '$')
+		if (value[cpt] == '$')
 		{
 			if (!(indice->sizeof_var) && !(indice->sizeof_val))
 			{
-				new_value[i] = value[count];
-				count++;
+				new_value[i] = value[cpt];
+				cpt++;
 			}
 			else if (indice->sizeof_var && !(indice->sizeof_val))
 			{
 				for (k = 0; k < indice->sizeof_var; k++)
-					count++;
+					cpt++;
 				i--;
 			}
 			else
@@ -121,15 +123,15 @@ char *val_replacement(store_var **head, char *value, char *new_value, int sizeof
 					new_value[i] = indice->value[k];
 					i++;
 				}
-				count += (indice->sizeof_var);
+				cpt += (indice->sizeof_var);
 				i--;
 			}
 			indice = indice->next;
 		}
 		else
 		{
-			new_value[i] = value[count];
-			count++;
+			new_value[i] = value[cpt];
+			cpt++;
 		}
 	}
 

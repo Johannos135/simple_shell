@@ -49,7 +49,8 @@ void set_env(char *name, char *value, node_sh *nodesh)
 		free(environ_varv);
 	}
 
-	nodesh->_environment = _realloc_v2(nodesh->_environment, i, sizeof(char *) * (i + 2));
+	nodesh->_environment = _realloc_v2(nodesh->_environment, i,
+			sizeof(char *) * (i + 2));
 	nodesh->_environment[i] = swap_info(name, value);
 	nodesh->_environment[i + 1] = NULL;
 }

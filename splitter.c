@@ -46,7 +46,7 @@ char *swap_char(char *valeur, int check)
 /**
  * aj_noeuds - add separators and command lines in the lists
  *
- * @dividor_head: head 
+ * @dividor_head: head
  * @linehead: head cmdline
  * @valeur: valeur string
  */
