@@ -24,7 +24,7 @@ int compare_char(char *str, const char *delimiter);
 
 /* Encapsulate in custom_string2 c file */
 void reverse_str(char *str);
-char *_strcat(char *dest,const char *src);
+char *_strcat(char *dest, const char *src);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *str1, char *str2);
 char *_strchr(char *str, char character);
@@ -38,7 +38,8 @@ int _atoi(char *str);
 /* memoryhandler.c */
 void _memcpy(void *destination, const void *source, unsigned int len);
 void *_realloc(void *src, unsigned int sizeof_src, unsigned int sizeof_dest);
-char **_realloc_v2(char **src, unsigned int sizeof_src, unsigned int sizeof_dest);
+char **_realloc_v2(char **src, unsigned int sizeof_src,
+		unsigned int sizeof_dest);
 
 
 /* prompt function prototype */
@@ -94,8 +95,10 @@ int syntax_verify(node_sh *nodesh, char *value);
 
 /* var_repartition.c */
 void environ_checker(store_var **h, char *in, node_sh *nodesh);
-int variable_checkers(store_var **entete, char *value, char *etat, node_sh *nodesh);
-char *val_replacement(store_var **head, char *value, char *new_value, int sizeof_n);
+int variable_checkers(store_var **entete, char *value,
+		char *etat, node_sh *nodesh);
+char *val_replacement(store_var **head, char *value,
+		char *new_value, int sizeof_n);
 char *var_replacement(char *value, node_sh *nodeshsh);
 
 /* execute_cmd.c */
@@ -119,7 +122,7 @@ char *read_line(int *in_value);
 
 /* variable_handler.c */
 store_var *aj_var(store_var **entete, int lng_var,
-                char *value, int lng_val);
+		char *value, int lng_val);
 void variable_free(store_var **entete);
 
 /* environment_name.c */
@@ -136,7 +139,7 @@ int _unsetenv(node_sh *nodesh);
 /* splitter */
 char *swap_char(char *valeur, int check);
 void aj_noeuds(list_separator **dividor_head,
-                store_line **linehead, char *valeur);
+		store_line **linehead, char *valeur);
 void suivant(list_separator **seplist, store_line **linelist, node_sh *nodesh);
 int split_commands(node_sh *nodesh, char *valeur);
 char **split_line(char *valeur);
