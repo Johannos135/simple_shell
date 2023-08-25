@@ -1,4 +1,4 @@
-#include "stringfun.h"
+#include "main.h"
 
 /**
  * _strspn - this tells the length of a string consisting

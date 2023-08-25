@@ -1,4 +1,4 @@
-#include "stringfun.h"
+#include "main.h"
 
 /**
  * reverse_str - this function aims to reverse a string.
