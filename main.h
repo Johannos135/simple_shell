@@ -13,6 +13,11 @@
 #include <limits.h>
 #include "template.h"
 
+
+#define SIZEOF_BUF 1024
+#define SIZEOF_TOKBUF 128
+#define TK_DELIM " \t\r\n\a"
+
 extern char **environ;
 
 /* Encapsulate in custom_string1 c file */
@@ -32,8 +37,8 @@ char *_strchr(char *str, char character);
 /* Encapsulate in custom_string3 */
 int _strspn(char *str, char *value);
 int _longueur(int number);
-char *_itoa(int number);
-int _atoi(char *str);
+char *cus_itoa(int number);
+int cus_atoi(char *str);
 
 /* memoryhandler.c */
 void _memcpy(void *destination, const void *source, unsigned int len);

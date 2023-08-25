@@ -35,24 +35,24 @@ void set_env(char *name, char *value, node_sh *nodesh)
 	int i;
 	char *environ_varv, *environ_nom;
 
-	for (i = 0; nodesh->_environment[i]; i++)
+	for (i = 0; nodesh->_environ[i]; i++)
 	{
-		environ_varv = _strdup(nodesh->_environment[i]);
+		environ_varv = _strdup(nodesh->_environ[i]);
 		environ_nom = _strtok(environ_varv, "=");
 		if (_strcmp(environ_nom, name) == 0)
 		{
-			free(nodesh->_environment[i]);
-			nodesh->_environment[i] = swap_info(environ_nom, value);
+			free(nodesh->_environ[i]);
+			nodesh->_environ[i] = swap_info(environ_nom, value);
 			free(environ_varv);
 			return;
 		}
 		free(environ_varv);
 	}
 
-	nodesh->_environment = _realloc_v2(nodesh->_environment, i,
+	nodesh->_environ = _realloc_v2(nodesh->_environ, i,
 			sizeof(char *) * (i + 2));
-	nodesh->_environment[i] = swap_info(name, value);
-	nodesh->_environment[i + 1] = NULL;
+	nodesh->_environ[i] = swap_info(name, value);
+	nodesh->_environ[i + 1] = NULL;
 }
 
 /**
@@ -92,9 +92,9 @@ int _unsetenv(node_sh *nodesh)
 		return (1);
 	}
 	k = -1;
-	for (i = 0; nodesh->_environment[i]; i++)
+	for (i = 0; nodesh->_environ[i]; i++)
 	{
-		environ_varv = _strdup(nodesh->_environment[i]);
+		environ_varv = _strdup(nodesh->_environ[i]);
 		environ_nom = _strtok(environ_varv, "=");
 		if (_strcmp(environ_nom, nodesh->args[1]) == 0)
 		{
@@ -108,17 +108,17 @@ int _unsetenv(node_sh *nodesh)
 		return (1);
 	}
 	env_rea = malloc(sizeof(char *) * (i));
-	for (i = j = 0; nodesh->_environment[i]; i++)
+	for (i = j = 0; nodesh->_environ[i]; i++)
 	{
 		if (i != k)
 		{
-			env_rea[j] = nodesh->_environment[i];
+			env_rea[j] = nodesh->_environ[i];
 			j++;
 		}
 	}
 	env_rea[j] = NULL;
-	free(nodesh->_environment[k]);
-	free(nodesh->_environment);
-	nodesh->_environment = env_rea;
+	free(nodesh->_environ[k]);
+	free(nodesh->_environ);
+	nodesh->_environ = env_rea;
 	return (1);
 }

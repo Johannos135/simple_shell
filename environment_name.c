@@ -33,10 +33,11 @@ int compare_namev(const char *name_environ, const char *name)
 char *_getenv(const char *name, char **_environ)
 {
 	char *point_venv;
-	int deplace, count = 0;
+	int deplace, count;
 
 	point_venv = NULL;
 	deplace = 0;
+	count = 0;
 
 	while (_environ[count])
 	{
@@ -60,17 +61,16 @@ char *_getenv(const char *name, char **_environ)
  */
 int _env(node_sh *nodesh)
 {
-	int count1 = 0, count2 = 0;
+	int count1, count2;
 
-	while (nodesh->_environment[count1])
+	for (count1 = 0; nodesh->_environ[count1]; count1++)
 	{
 
-		while (nodesh->_environment[count1][count2])
-			count2++;
+		for (count2 = 0; nodesh->_environ[count1][count2]; count2++)
+			;
 
-		write(STDOUT_FILENO, nodesh->_environment[count1], count2);
+		write(STDOUT_FILENO, nodesh->_environ[count1], count2);
 		write(STDOUT_FILENO, "\n", 1);
-		count1++;
 	}
 	nodesh->status = 0;
 

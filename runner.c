@@ -47,7 +47,7 @@ void runner(node_sh *nodesh)
 	boucle = 1;
 	while (boucle == 1)
 	{
-		write(STDOUT_FILENO, "$ ", 2);
+		prompt();
 		input = read_line(&return_input);
 		if (return_input != -1)
 		{

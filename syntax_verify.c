@@ -119,7 +119,7 @@ void display_error_syntax(node_sh *nodesh, char *value, int i, int check)
 
 	message2 = ": Syntax error: \"";
 	message3 = "\" unexpected\n";
-	counter = _itoa(nodesh->cpt);
+	counter = cus_itoa(nodesh->cpt);
 	length = _strlen(nodesh->argv[0]) + _strlen(counter);
 	length += _strlen(message) + _strlen(message2) + _strlen(message3) + 2;
 

@@ -59,12 +59,12 @@ int _longueur(int number)
 }
 
 /**
- * _itoa - this function aims to transform an integer to a string.
+ * cus_itoa - this function aims to transform an integer to a string.
  * @number: this parameter represents the number to be converted.
  *
  * Return: the number in string format.
  */
-char *_itoa(int number)
+char *cus_itoa(int number)
 {
 	unsigned int num;
 	char *event;
@@ -94,12 +94,12 @@ char *_itoa(int number)
 }
 
 /**
- * _atoi - is the opposite of _itoa it transforms a str into an integer.
+ * cus_atoi - is the opposite of cus_itoa it transforms a str into an integer.
  * @str: string parameter to be converted.
  *
  * Return: a new value as integer.
  */
-int _atoi(char *str)
+int cus_atoi(char *str)
 {
 	unsigned int cpt_a = 0, cpt_b = 0, sizeof_num = 0;
 	unsigned int val1 = 0, val2 = 1, val3 = 1;

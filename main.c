@@ -8,12 +8,12 @@ void dt_fr(node_sh *nodesh)
 {
 	unsigned int i;
 
-	for (i = 0; nodesh->_environment[i]; i++)
+	for (i = 0; nodesh->_environ[i]; i++)
 	{
-		free(nodesh->_environment[i]);
+		free(nodesh->_environ[i]);
 	}
 
-	free(nodesh->_environment);
+	free(nodesh->_environ);
 	free(nodesh->pid);
 }
 
@@ -35,16 +35,16 @@ void data_setter(node_sh *nodesh, char **argv)
 	while (environ[count])
 		count++;
 
-	nodesh->_environment = malloc(sizeof(char *) * (count + 1));
+	nodesh->_environ = malloc(sizeof(char *) * (count + 1));
 
 	while (environ[count])
 	{
-		nodesh->_environment[count] = _strdup(environ[count]);
+		nodesh->_environ[count] = _strdup(environ[count]);
 		count++;
 	}
 
-	nodesh->_environment[count] = NULL;
-	nodesh->pid = _itoa(getpid());
+	nodesh->_environ[count] = NULL;
+	nodesh->pid = cus_itoa(getpid());
 }
 
 /**

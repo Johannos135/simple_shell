@@ -51,7 +51,7 @@ char *directory_err(node_sh *nodesh)
 	int longueur, ident;
 	char *message_er, *counter, *message;
 
-	counter = _itoa(nodesh->cpt);
+	counter = cus_itoa(nodesh->cpt);
 
 	if (nodesh->args[1][0] == '-')
 	{
@@ -91,7 +91,7 @@ char *error404(node_sh *nodesh)
 	int size_er;
 	char *message_er, *counter;
 
-	counter = _itoa(nodesh->cpt);
+	counter = cus_itoa(nodesh->cpt);
 	size_er = _strlen(nodesh->argv[0]) + _strlen(counter);
 	size_er += _strlen(nodesh->args[0]) + 16;
 	message_er = malloc(sizeof(char) * (size_er + 1));
@@ -124,7 +124,7 @@ char *exit_error(node_sh *nodesh)
 	int size_er;
 	char *message_er, *counter;
 
-	counter = _itoa(nodesh->cpt);
+	counter = cus_itoa(nodesh->cpt);
 	size_er = _strlen(nodesh->argv[0]) + _strlen(counter);
 	size_er += _strlen(nodesh->args[0]) + _strlen(nodesh->args[1]) + 23;
 	message_er = malloc(sizeof(char) * (size_er + 1));
@@ -158,7 +158,7 @@ char *environ_error(node_sh *nodesh)
 	int size_er;
 	char *message_er, *counter, *message;
 
-	counter = _itoa(nodesh->cpt);
+	counter = cus_itoa(nodesh->cpt);
 	message = ": Impossible to add or remove from env\n";
 	size_er = _strlen(nodesh->argv[0]) + _strlen(counter);
 	size_er += _strlen(nodesh->args[0]) + _strlen(message) + 4;

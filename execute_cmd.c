@@ -171,7 +171,7 @@ int execute_cmd(node_sh *nodesh)
 		return (1);
 	if (exec == 0)
 	{
-		dir = _which(nodesh->args[0], nodesh->_environment);
+		dir = _which(nodesh->args[0], nodesh->_environ);
 		if (cmd_code_checker(dir, nodesh) == 1)
 			return (1);
 	}
@@ -180,10 +180,10 @@ int execute_cmd(node_sh *nodesh)
 	if (pd == 0)
 	{
 		if (exec == 0)
-			dir = _which(nodesh->args[0], nodesh->_environment);
+			dir = _which(nodesh->args[0], nodesh->_environ);
 		else
 			dir = nodesh->args[0];
-		execve(dir + exec, nodesh->args, nodesh->_environment);
+		execve(dir + exec, nodesh->args, nodesh->_environ);
 	}
 	else if (pd < 0)
 	{

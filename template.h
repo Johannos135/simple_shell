@@ -1,16 +1,13 @@
 #ifndef _TEMPLATE_
 #define _TEMPLATE_
 
-#define SIZEOF_BUF 1024
-#define SIZEOF_TOKBUF 128
-#define TK_DELIM " \t\r\n\a"
 
 
 /**
  * struct node_data - this template gathers runtime data.
  * @argv: this field is for arg vector.
  * @args: this fields is for the number of argv.
- * @_environment: this field is for the env variable
+ * @_environ: this field is for the env variable
  * @input: this field is for all the input entered in the cls.
  * @status: dernier status du shell
  * @cpt: Count all the lines.
@@ -23,7 +20,7 @@ typedef struct node_data
 	char **args;
 	int status;
 	int cpt;
-	char **_environment;
+	char **_environ;
 	char *pid;
 } node_sh;
 

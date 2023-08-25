@@ -93,7 +93,7 @@ void changed_previous(node_sh *nodesh)
 	getcwd(print_wd, sizeof(print_wd));
 	copy_pwd = _strdup(print_wd);
 
-	point_old = _getenv("OLDPWD", nodesh->_environment);
+	point_old = _getenv("OLDPWD", nodesh->_environ);
 
 	if (point_old == NULL)
 		copy_old = copy_pwd;
@@ -107,7 +107,7 @@ void changed_previous(node_sh *nodesh)
 	else
 		set_env("PWD", copy_old, nodesh);
 
-	point_pwd = _getenv("PWD", nodesh->_environment);
+	point_pwd = _getenv("PWD", nodesh->_environ);
 
 	write(STDOUT_FILENO, point_pwd, _strlen(point_pwd));
 	write(STDOUT_FILENO, "\n", 1);
@@ -133,7 +133,7 @@ void changed_to_home(node_sh *nodesh)
 	getcwd(print_wd, sizeof(print_wd));
 	point_pwd = _strdup(print_wd);
 
-	accueil = _getenv("HOME", nodesh->_environment);
+	accueil = _getenv("HOME", nodesh->_environ);
 
 	if (accueil == NULL)
 	{

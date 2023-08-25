@@ -11,7 +11,7 @@ char *path_err(node_sh *nodesh)
 	int size_er;
 	char *message_er, *counter;
 
-	counter = _itoa(nodesh->cpt);
+	counter = cus_itoa(nodesh->cpt);
 	size_er = _strlen(nodesh->argv[0]) + _strlen(counter);
 	size_er += _strlen(nodesh->args[0]) + 24;
 	message_er = malloc(sizeof(char) * (size_er + 1));

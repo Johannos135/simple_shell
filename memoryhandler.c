@@ -9,14 +9,13 @@
  */
 void _memcpy(void *destination, const void *source, unsigned int len)
 {
-	unsigned int count = 0;
+	unsigned int count;
 	char *ptr_src = (char *)source;
 	char *ptr_dest = (char *)destination;
 
-	while (count < len)
+	for (count = 0; count < len; count++)
 	{
 		ptr_dest[count] = ptr_src[count];
-		count++;
 	}
 }
 
@@ -67,7 +66,7 @@ char **_realloc_v2(char **src, unsigned int sizeof_src,
 		unsigned int sizeof_dest)
 {
 	char **block_new;
-	unsigned int count = 0;
+	unsigned int count;
 
 	if (src == NULL)
 		return (malloc(sizeof(char *) * sizeof_dest));
@@ -80,10 +79,9 @@ char **_realloc_v2(char **src, unsigned int sizeof_src,
 	if (block_new == NULL)
 		return (NULL);
 
-	while (count < sizeof_src)
+	for (count = 0; count < sizeof_src; count++)
 	{
 		block_new[count] = src[count];
-		count++;
 	}
 	free(src);
 	return (block_new);

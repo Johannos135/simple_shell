@@ -12,7 +12,7 @@ void environ_checker(store_var **h, char *in, node_sh *nodesh)
 	int row, param, cpt, left_value;
 	char **nvl_env;
 
-	nvl_env = nodesh->_environment;
+	nvl_env = nodesh->_environ;
 	for (row = 0; nvl_env[row]; row++)
 	{
 		for (cpt = 1, param = 0; nvl_env[row][param]; param++)
@@ -151,7 +151,7 @@ char *var_replacement(char *value, node_sh *nodeshsh)
 	char *status, *new_value;
 	int sizeof_val, sizeof_n;
 
-	status = _itoa(nodeshsh->status);
+	status = cus_itoa(nodeshsh->status);
 	head = NULL;
 
 	sizeof_val = variable_checkers(&head, value, status, nodeshsh);

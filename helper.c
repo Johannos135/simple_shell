@@ -50,6 +50,14 @@ void general_info(void)
 	write(STDOUT_FILENO, geninfo, _strlen(geninfo));
 	geninfo = "Type 'help name' to find out more about the function 'name'.\n\n ";
 	write(STDOUT_FILENO, geninfo, _strlen(geninfo));
+	geninfo = " alias: alias [name=['string']]\n cd: cd [-L|[-P [-e]] [-@]] ";
+	write(STDOUT_FILENO, geninfo, _strlen(geninfo));
+	geninfo = "[dir]\nexit: exit [n]\n  env: env [option] [name=value] [command ";
+	write(STDOUT_FILENO, geninfo, _strlen(geninfo));
+	geninfo = "[args]]\n  setenv: setenv [variable] [value]\n  unsetenv: ";
+	write(STDOUT_FILENO, geninfo, _strlen(geninfo));
+	geninfo = "unsetenv [variable]\n";
+	write(STDOUT_FILENO, geninfo, _strlen(geninfo));
 }
 
 /**
