@@ -1,75 +1,77 @@
 #include "main.h"
 
 /**
- * cmt_remove - deletes comments from the input
+ * sans_comment - deletes comments from the entree
  *
- * @value: value of input
- * Return: remove comment in input
+ * @dans: entree strdansg
+ * Return: entree sans comments
  */
-char *cmt_remove(char *value)
+char *sans_comment(char *dans)
 {
-	int i, jusqua;
+	int i, up_to;
 
-	jusqua = 0;
-	for (i = 0; value[i]; i++)
+	up_to = 0;
+	for (i = 0; dans[i]; i++)
 	{
-		if (value[i] == '#')
+		if (dans[i] == '#')
 		{
 			if (i == 0)
 			{
-				free(value);
+				free(dans);
 				return (NULL);
 			}
 
-			if (value[i - 1] == ' ' || value[i - 1] == '\t' || value[i - 1] == ';')
-				jusqua = i;
+			if (dans[i - 1] == ' ' || dans[i - 1] == '\t' || dans[i - 1] == ';')
+				up_to = i;
 		}
 	}
 
-	if (jusqua != 0)
+	if (up_to != 0)
 	{
-		value = _realloc(value, i, jusqua + 1);
-		value[jusqua] = '\0';
+		dans = _realloc(dans, i, up_to + 1);
+		dans[up_to] = '\0';
 	}
 
-	return (value);
+	return (dans);
 }
 
 /**
- * runner - shell runner
- * @nodesh: node value
+ * shell_boucle - Loop of shell
+ * @nodesh: donnee relevant (argv, entree, args)
+ *
+ * Return: no return.
  */
-void runner(node_sh *nodesh)
+void shell_boucle(node_sh *nodesh)
 {
-	int boucle, return_input;
-	char *input;
+	int boucle, fin_v;
+	char *entree;
 
 	boucle = 1;
 	while (boucle == 1)
 	{
-		prompt();
-		input = read_line(&return_input);
-		if (return_input != -1)
+		write(STDIN_FILENO, "$ ", 2);
+		entree = read_ldanse(&fin_v);
+		if (fin_v != -1)
 		{
-			input = cmt_remove(input);
-			if (input == NULL)
+			entree = sans_comment(entree);
+			if (entree == NULL)
 				continue;
 
-			if (syntax_verify(nodesh, input) == 1)
+			if (check_syntax_err(nodesh, entree) == 1)
 			{
 				nodesh->status = 2;
-				free(input);
+				free(entree);
 				continue;
 			}
-			input = var_replacement(input, nodesh);
-			boucle = split_commands(nodesh, input);
-			nodesh->cpt += 1;
-			free(input);
+			entree = repart_variable(entree, nodesh);
+			boucle = splitter_commands(nodesh, entree);
+			nodesh->counter += 1;
+			free(entree);
 		}
 		else
 		{
 			boucle = 0;
-			free(input);
+			free(entree);
 		}
 	}
 }

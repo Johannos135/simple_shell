@@ -1,66 +1,67 @@
 #include "main.h"
 
 /**
- * is_cdir - veriy if ":"  is in the current directory.
- * @chemin: path towards char.
- * @count: index ptr
- * Return: 1 or  0 otherwise.
+ * is_changedir - checks ":" if is dans the current directory.
+ * @path: type char pointer char.
+ * @i: type int pointer of dansdex.
+ * Return: 1 if the path is searchable dans the changed, 0 otherwise.
  */
-int is_cdir(char *chemin, int *count)
+int is_changedir(char *path, int *i)
 {
-	if (chemin[*count] == ':')
+	if (path[*i] == ':')
 		return (1);
 
-	while (chemin[*count] != ':' && chemin[*count])
+	while (path[*i] != ':' && path[*i])
 	{
-		*count += 1;
+		*i += 1;
 	}
 
-	if (chemin[*count])
-		*count += 1;
+	if (path[*i])
+		*i += 1;
 
 	return (0);
 }
 
 /**
- * _which - gives command position
- * @cmd: command name
- * @_environ: variable d'environment
- * Return: command position.
+ * _which - locates a command
+ *
+ * @cmd: command nom
+ * @_environ: environment variable
+ * Return: location of the command.
  */
 char *_which(char *cmd, char **_environ)
 {
-	char *chemin, *ptr_chemin, *token_chemin, *dir;
-	int sizeof_direct, sizeof_cmd, i;
+	char *path, *ptr_path, *token_path, *dir;
+	int longu_dir, longu_cmd, i;
 	struct stat st;
 
-	chemin = _getenv("PATH", _environ);
-	if (chemin)
+	path = _getenv("PATH", _environ);
+	if (path)
 	{
-		ptr_chemin = _strdup(chemin);
-		sizeof_cmd = _strlen(cmd);
-		token_chemin = _strtok(ptr_chemin, ":");
+		ptr_path = _strdup(path);
+		longu_cmd = _strlongu(cmd);
+		token_path = _strtok(ptr_path, ":");
 		i = 0;
-		while (token_chemin != NULL)
+		while (token_path != NULL)
 		{
-			if (is_cdir(chemin, &i))
+			if (is_changedir(path, &i))
 				if (stat(cmd, &st) == 0)
 					return (cmd);
-			sizeof_direct = _strlen(token_chemin);
-			dir = malloc(sizeof_direct + sizeof_cmd + 2);
-			_strcpy(dir, token_chemin);
+			longu_dir = _strlongu(token_path);
+			dir = malloc(longu_dir + longu_cmd + 2);
+			_strcpy(dir, token_path);
 			_strcat(dir, "/");
 			_strcat(dir, cmd);
 			_strcat(dir, "\0");
 			if (stat(dir, &st) == 0)
 			{
-				free(ptr_chemin);
+				free(ptr_path);
 				return (dir);
 			}
 			free(dir);
-			token_chemin = _strtok(NULL, ":");
+			token_path = _strtok(NULL, ":");
 		}
-		free(ptr_chemin);
+		free(ptr_path);
 		if (stat(cmd, &st) == 0)
 			return (cmd);
 		return (NULL);
@@ -72,31 +73,32 @@ char *_which(char *cmd, char **_environ)
 }
 
 /**
- * is_executable - guesses if exec
- * @nodesh: node value
- * Return: 0(Success)
+ * is_executable - determdanses if is an executable
+ *
+ * @nodesh: donnee structure
+ * Return: 0 if is not an executable, other number if it does
  */
 int is_executable(node_sh *nodesh)
 {
 	struct stat st;
 	int i;
-	char *countnput;
+	char *entree;
 
-	countnput = nodesh->args[0];
-	for (i = 0; countnput[i]; i++)
+	entree = nodesh->args[0];
+	for (i = 0; entree[i]; i++)
 	{
-		if (countnput[i] == '.')
+		if (entree[i] == '.')
 		{
-			if (countnput[i + 1] == '.')
+			if (entree[i + 1] == '.')
 				return (0);
-			if (countnput[i + 1] == '/')
+			if (entree[i + 1] == '/')
 				continue;
 			else
 				break;
 		}
-		else if (countnput[i] == '/' && i != 0)
+		else if (entree[i] == '/' && i != 0)
 		{
-			if (countnput[i + 1] == '.')
+			if (entree[i + 1] == '.')
 				continue;
 			i++;
 			break;
@@ -107,26 +109,26 @@ int is_executable(node_sh *nodesh)
 	if (i == 0)
 		return (0);
 
-	if (stat(countnput + i, &st) == 0)
+	if (stat(entree + i, &st) == 0)
 	{
 		return (i);
 	}
-	_error_g(nodesh, 127);
+	get_err(nodesh, 127);
 	return (-1);
 }
 
 /**
- * cmd_code_checker - verifies if users got permissions or not
+ * check_err_cmd - verifies if user has permissions to access
  *
- * @dir: target directory
- * @nodesh: node value
- * Return: 1 or 0 if no error
+ * @dir: destdansation directory
+ * @nodesh: donnee structure
+ * Return: 1 if there is an err, 0 if not
  */
-int cmd_code_checker(char *dir, node_sh *nodesh)
+int check_err_cmd(char *dir, node_sh *nodesh)
 {
 	if (dir == NULL)
 	{
-		_error_g(nodesh, 127);
+		get_err(nodesh, 127);
 		return (1);
 	}
 
@@ -134,7 +136,7 @@ int cmd_code_checker(char *dir, node_sh *nodesh)
 	{
 		if (access(dir, X_OK) == -1)
 		{
-			_error_g(nodesh, 126);
+			get_err(nodesh, 126);
 			free(dir);
 			return (1);
 		}
@@ -144,7 +146,7 @@ int cmd_code_checker(char *dir, node_sh *nodesh)
 	{
 		if (access(nodesh->args[0], X_OK) == -1)
 		{
-			_error_g(nodesh, 126);
+			get_err(nodesh, 126);
 			return (1);
 		}
 	}
@@ -153,18 +155,19 @@ int cmd_code_checker(char *dir, node_sh *nodesh)
 }
 
 /**
- * execute_cmd - this function executes command lines
- * @nodesh: node value
- * Return: if true 1
+ * execute_cmd - executes command ldanses
+ *
+ * @nodesh: donnee relevant (args and entree)
+ * Return: 1 on success.
  */
 int execute_cmd(node_sh *nodesh)
 {
 	pid_t pd;
-	pid_t work_pd;
-	int etat;
+	pid_t wpd;
+	int state;
 	int exec;
 	char *dir;
-	(void) work_pd;
+	(void) wpd;
 
 	exec = is_executable(nodesh);
 	if (exec == -1)
@@ -172,7 +175,7 @@ int execute_cmd(node_sh *nodesh)
 	if (exec == 0)
 	{
 		dir = _which(nodesh->args[0], nodesh->_environ);
-		if (cmd_code_checker(dir, nodesh) == 1)
+		if (check_err_cmd(dir, nodesh) == 1)
 			return (1);
 	}
 
@@ -193,10 +196,10 @@ int execute_cmd(node_sh *nodesh)
 	else
 	{
 		do {
-			work_pd = waitpid(pd, &etat, WUNTRACED);
-		} while (!WIFEXITED(etat) && !WIFSIGNALED(etat));
+			wpd = waitpid(pd, &state, WUNTRACED);
+		} while (!WIFEXITED(state) && !WIFSIGNALED(state));
 	}
 
-	nodesh->status = etat / 256;
+	nodesh->status = state / 256;
 	return (1);
 }

@@ -13,142 +13,142 @@
 #include <limits.h>
 #include "template.h"
 
+/* helper_lists.c */
+div_list *add_sep_node_end(div_list **entete, char sep);
+void free_div_list(div_list **entete);
+ligne *add_ldanse_node_end(ligne **entete, char *ldanse);
+void free_ligne(ligne **entete);
 
-#define SIZEOF_BUF 1024
-#define SIZEOF_TOKBUF 128
-#define TK_DELIM " \t\r\n\a"
+/* helper_liststrdansg2.c */
+store_var *aj_rv_node(store_var **entete, int lvar, char *var, int lval);
+void lib_rv_list(store_var **entete);
 
-extern char **environ;
-
-/* Encapsulate in custom_string1 c file */
-int _strlen(const char *str);
-int _isdigit(const char *str);
-char *_strtok(char *str, const char *delimiter);
-char *_strdup(const char *str);
-int compare_char(char *str, const char *delimiter);
-
-/* Encapsulate in custom_string2 c file */
-void reverse_str(char *str);
+/* helper_str functions */
 char *_strcat(char *dest, const char *src);
 char *_strcpy(char *dest, char *src);
-int _strcmp(char *str1, char *str2);
-char *_strchr(char *str, char character);
+int _strcmp(char *strdansg1, char *strdansg2);
+char *_strchr(char *s, char c);
+int _strspn(char *s, char *accept);
 
-/* Encapsulate in custom_string3 */
-int _strspn(char *str, char *value);
-int _longueur(int number);
-char *cus_itoa(int number);
-int cus_atoi(char *str);
+/* helper_mem.c */
+void _memcpy(void *newptr, const void *ptr, unsigned int size);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char **_reallochangedp(char **ptr, unsigned int old_size, unsigned int new_size);
 
-/* memoryhandler.c */
-void _memcpy(void *destination, const void *source, unsigned int len);
-void *_realloc(void *src, unsigned int sizeof_src, unsigned int sizeof_dest);
-char **_realloc_v2(char **src, unsigned int sizeof_src,
-		unsigned int sizeof_dest);
+/* helper_str2.c */
+char *_strdup(const char *s);
+int _strlongu(const char *s);
+int cmp_chars(char str[], const char *delim);
+char *_strtok(char str[], const char *delim);
+int _isdigit(const char *s);
 
+/* helper_str3.c */
+void reverse_str(char *s);
 
-/* prompt function prototype */
-void prompt(void);
-void _sigint_g(int s);
-/* message_error.c */
-char *concat_error(node_sh *nodesh, char *message, char *bad,
-		char *counter);
-char *directory_err(node_sh *nodesh);
-char *error404(node_sh *nodesh);
-char *exit_error(node_sh *nodesh);
-char *environ_error(node_sh *nodesh);
+/* check_syntax_err.c */
+int repeated_char(char *entree, int i);
+int err_sep_op(char *entree, int i, char last);
+int first_char(char *entree, int *i);
+void print_syntax_err(node_sh *nodesh, char *entree, int i, int checker);
+int check_syntax_err(node_sh *nodesh, char *entree);
 
-/*permission error*/
-char *path_err(node_sh *nodesh);
+/* shell_boucle.c */
+char *sans_comment(char *dans);
+void shell_boucle(node_sh *nodesh);
 
-/* helper.c */
-void environ_helper(void);
-void setenv_helper(void);
-void unsetenv_helper(void);
-void general_info(void);
-void exit_helper(void);
+/* read_ldanse.c */
+char *read_ldanse(int *fin_v);
 
-/* directory_handler.c */
+/* splitter.c */
+char *swap_char(char *entree, int checker);
+void add_nodes(div_list **entete_s, ligne **entete_l, char *entree);
+void go_next(div_list **list_s, ligne **list_l, node_sh *nodesh);
+int splitter_commands(node_sh *nodesh, char *entree);
+char **splitter_ldanse(char *entree);
+
+/* repart_variable.c */
+void environ_checker(store_var **h, char *dans, node_sh *donnee);
+int check_vars(store_var **h, char *dans, char *st, node_sh *donnee);
+char *replaced_entree(store_var **entete, char *entree, char *new_entree, int lon);
+char *repart_variable(char *entree, node_sh *nodesh);
+
+/* get_ldanse.c */
+void provide_ldanse(char **ldanseptr, size_t *n, char *buffer, size_t j);
+ssize_t get_ldanse(char **ldanseptr, size_t *n, FILE *stream);
+
+/* exec_ldanse */
+int exec_ldanse(node_sh *nodesh);
+
+/* execute_cmd.c */
+int is_changedir(char *path, int *i);
+char *_which(char *cmd, char **_environ);
+int is_executable(node_sh *nodesh);
+int check_err_cmd(char *dir, node_sh *nodesh);
+int execute_cmd(node_sh *nodesh);
+
+/* env-nom.c */
+char *_getenv(const char *nom, char **_environ);
+int _env(node_sh *nodesh);
+
+/* env-var.c */
+char *copy_dansfo(char *nom, char *value);
+void set_env(char *nom, char *value, node_sh *nodesh);
+int _setenv(node_sh *nodesh);
+int _unsetenv(node_sh *nodesh);
+
+/* changed.c */
 void changed_dot(node_sh *nodesh);
 void changed_to(node_sh *nodesh);
 void changed_previous(node_sh *nodesh);
 void changed_to_home(node_sh *nodesh);
 
-/* dirchange.c */
-int change_current(node_sh *nodesh);
+/* changed_shell.c */
+int changed_shell(node_sh *nodesh);
 
-/* list_handler.c */
-void free_dividor(list_separator **entete);
-list_separator *separator_list(list_separator **entete, char separator);
-store_line *aj_ligne(store_line **entete, char *cmdline);
-void line_free(store_line **entete);
+/* get_builtdans */
+int (*get_builtdans(char *cmd))(node_sh *nodesh);
 
-/** main.h **/
-void dt_fr(node_sh *nodesh);
-void data_setter(node_sh *nodesh, char **argv);
+/* _exit.c */
+int exit_shell(node_sh *nodesh);
 
-/* _error_g.c */
-int _error_g(node_sh *nodesh, int err_value);
-int _help_g(node_sh *nodesh);
+/* helper_stdlib.c */
+int get_longu(int n);
+char *helper_itoa(int n);
+int _atoi(char *s);
 
-/* syntax_verify */
-int cpt_char(char *value, int count);
-int error_dividor(char *value, int count, char dernier);
-int char_indice(char *value, int *count);
-void display_error_syntax(node_sh *nodesh, char *value, int i, int check);
-int syntax_verify(node_sh *nodesh, char *value);
+/* errhandler1.c */
+char *strcat_changed(node_sh *, char *, char *, char *);
+char *err_get_changed(node_sh *nodesh);
+char *err_not_found(node_sh *nodesh);
+char *err_exit_shell(node_sh *nodesh);
 
-/* var_repartition.c */
-void environ_checker(store_var **h, char *in, node_sh *nodesh);
-int variable_checkers(store_var **entete, char *value,
-		char *etat, node_sh *nodesh);
-char *val_replacement(store_var **head, char *value,
-		char *new_value, int sizeof_n);
-char *var_replacement(char *value, node_sh *nodeshsh);
+/* errhandler2.c */
+char *err_get_alias(char **args);
+char *err_env(node_sh *nodesh);
+char *err_syntax(char **args);
+char *err_permission(char **args);
+char *err_path_126(node_sh *nodesh);
 
-/* execute_cmd.c */
-int is_cdir(char *chemin, int *count);
-char *_which(char *cmd, char **_environ);
-int is_executable(node_sh *nodesh);
-int cmd_code_checker(char *dir, node_sh *nodesh);
-int execute_cmd(node_sh *nodesh);
 
-/* execute_line.c */
-int execute_line(node_sh *nodesh);
-int quit_shell(node_sh *nodesh);
-int (*_builtin_g(char *cmd))(node_sh *);
+/* get_err.c */
+int get_err(node_sh *nodesh, int eval);
 
-/* line_getter.c */
-void provide_line(char **ptrptr_cmd, size_t *n, char *buffer, size_t sizeof_b);
-ssize_t get_line(char **ptrptr_cmd, size_t *n, FILE *stream);
+/* signal_getter.c */
+void signal_getter(int sig);
 
-/* read_getter.c */
-char *read_line(int *in_value);
+/* helper1.c */
+void helper1_env(void);
+void helper1_setenv(void);
+void helper1_unsetenv(void);
+void helper1_general(void);
+void helper1_exit(void);
 
-/* variable_handler.c */
-store_var *aj_var(store_var **entete, int lng_var,
-		char *value, int lng_val);
-void variable_free(store_var **entete);
+/* helper12.c */
+void helper1(void);
+void helper1_alias(void);
+void helper1_changed(void);
 
-/* environment_name.c */
-int compare_namev(const char *name_environ, const char *name);
-char *_getenv(const char *name, char **_environ);
-int _env(node_sh *nodesh);
-
-/* environment */
-char *swap_info(char *name, char *value);
-void set_env(char *name, char *value, node_sh *nodesh);
-int _setenv(node_sh *nodesh);
-int _unsetenv(node_sh *nodesh);
-
-/* splitter */
-char *swap_char(char *valeur, int check);
-void aj_noeuds(list_separator **dividor_head,
-		store_line **linehead, char *valeur);
-void suivant(list_separator **seplist, store_line **linelist, node_sh *nodesh);
-int split_commands(node_sh *nodesh, char *valeur);
-char **split_line(char *valeur);
-
-void runner(node_sh *nodesh);
+/* get_help.c */
+int get_help(node_sh *nodesh);
 
 #endif

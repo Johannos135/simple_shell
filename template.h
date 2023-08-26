@@ -1,76 +1,79 @@
 #ifndef _TEMPLATE_
 #define _TEMPLATE_
 
+#define TAILLEBUF 1024
+#define TOK_TAILLEBUF 128
+#define TOK_DELIM " \t\r\n\a"
 
+extern char **environ;
 
 /**
- * struct node_data - this template gathers runtime data.
- * @argv: this field is for arg vector.
- * @args: this fields is for the number of argv.
- * @_environ: this field is for the env variable
- * @input: this field is for all the input entered in the cls.
- * @status: dernier status du shell
- * @cpt: Count all the lines.
- * @pid: represents the ID of the process
+ * struct donnee - structure de donne
+ * @argv: argument vector
+ * @entree: valeur d'entrer
+ * @args: jzton
+ * @status: last status
+ * @counter: ldanses counter
+ * @_environ: variable d'environ
+ * @pid: ID du processus
  */
-typedef struct node_data
+typedef struct donnee
 {
 	char **argv;
-	char *input;
+	char *entree;
 	char **args;
 	int status;
-	int cpt;
+	int counter;
 	char **_environ;
 	char *pid;
 } node_sh;
 
 /**
- * struct singlelist_sep - this template is of separators symbols
- * @dividor: two dividor possible & and ;
- * @next: this fields is for the next value of the node
+ * struct div_list_s - struct diviseur
+ * @separator: ; | &
+ * @next: noeud suivant
  */
-typedef struct singlelist_sep
+typedef struct div_list_s
 {
-	char dividor;
-	struct singlelist_sep *next;
-} list_separator;
+	char separator;
+	struct div_list_s *next;
+} div_list;
 
 /**
- * struct singlelist_cmd - this template is for storing command
- * lines.
- * @cmd_line: this field represents the command line.
- * @next: this fields is for the next node value.
+ * struct ligne_s - tructure ligne
+ * @ldanse: ligne de commande
+ * @next: noeud suivant
  */
-typedef struct singlelist_cmd
+typedef struct ligne_s
 {
-	char *cmd_line;
-	struct singlelist_cmd *next;
-} store_line;
+	char *ldanse;
+	struct ligne_s *next;
+} ligne;
 
 /**
- * struct singlelist_var - this template stores variables
- * @sizeof_var: holds the sizeof the variable.
- * @value: holds the value.
- * @sizeof_val: holds the sizeof the value.
- * @next: this fields is for the next node value.
+ * struct store_var_list - structure var
+ * @longu_var: longuueur variable
+ * @val: valeur
+ * @longu_val: longuueur valeur
+ * @next: noeud suivant
  */
-typedef struct singlelist_var
+typedef struct store_var_list
 {
-	int sizeof_var;
-	char *value;
-	int sizeof_val;
-	struct singlelist_var *next;
+	int longu_var;
+	char *val;
+	int longu_val;
+	struct store_var_list *next;
 } store_var;
 
 /**
- * struct str_builtin - this template holds builtin commands.
- * @name: holds the build command's name
- * @fonction: holds a particular data type.
+ * struct builtdans_s - structure commande preconstruite
+ * @nom: nom des commandes
+ * @f: donnee function
  */
-typedef struct str_builtin
+typedef struct builtdans_s
 {
-	char *name;
-	int (*fonction)(node_sh *nodesh);
-} builtins;
+	char *nom;
+	int (*f)(node_sh *nodesh);
+} builtdans_t;
 
 #endif
