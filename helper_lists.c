@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * add_sep_node_end - adds a separator found at the end
- * of a div_list.
- * @entete: entete of the ldansked list.
- * @sep: separator found (; | &).
- * Return: address of the entete.
+ * add_sep_node_end - ajoute un separateur a la fin
+ * du noeud
+ * @entete: entete en debut de noeud
+ * @sep: separateur trouve (; | &).
+ * Return: address of sep.
  */
 div_list *add_sep_node_end(div_list **entete, char sep)
 {
@@ -34,9 +34,8 @@ div_list *add_sep_node_end(div_list **entete, char sep)
 }
 
 /**
- * free_div_list - frees a div_list
- * @entete: entete of the ldansked list.
- * Return: no return.
+ * free_div_list - libere la liste des sep
+ * @entete: entete du noeud
  */
 void free_div_list(div_list **entete)
 {
@@ -56,9 +55,9 @@ void free_div_list(div_list **entete)
 }
 
 /**
- * add_ldanse_node_end - adds a command ldanse at the end
- * of a ligne.
- * @entete: entete of the ldansked list.
+ * add_ldanse_node_end - ajoute une commande a la
+ * fin de la ligne
+ * @entete: entete du noeud
  * @ldanse: command ldanse.
  * Return: address of the entete.
  */
@@ -89,9 +88,8 @@ ligne *add_ldanse_node_end(ligne **entete, char *ldanse)
 }
 
 /**
- * free_ligne - frees a ligne
- * @entete: entete of the ldansked list.
- * Return: no return.
+ * free_ligne - libere une ligne
+ * @entete: entete de la ligne
  */
 void free_ligne(ligne **entete)
 {

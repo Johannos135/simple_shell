@@ -3,8 +3,8 @@
 /**
  * exit_shell - exits the shell
  *
- * @nodesh: donnee relevant (status and args)
- * Return: 0 on success.
+ * @nodesh: donnee soit status, soit args
+ * Return: 0 si vrai
  */
 int exit_shell(node_sh *nodesh)
 {
